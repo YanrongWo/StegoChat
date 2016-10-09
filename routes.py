@@ -42,8 +42,9 @@ def publishMessage():
 
     def push(msg):
         for s in subscriptions[:]:
-            #print msg
+            print msg
             s.put(msg)
+
 
     gevent.spawn(push, json.dumps(message_dict))
 
@@ -56,13 +57,12 @@ def subscribeToChat():
         subscriptions.append(q)
         try:
             while True:
-                try:
-                    gevent.sleep(1)
-                    result = q.get(False)
-                    ev = ServerSentEvent(str(result))
-                    yield ev.encode()
-                except Empty:
-                    gevent.sleep(2)
+
+                gevent.sleep(1)
+                result = q.get()
+                ev = ServerSentEvent(str(result))
+                yield ev.encode()
+    
         except GeneratorExit: # Or maybe use flask signals
             subscriptions.remove(q)
     return Response(genMessages(), mimetype="text/event-stream")

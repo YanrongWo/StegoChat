@@ -1,4 +1,5 @@
 from __init__ import app
+from gevent.wsgi import WSGIServer
 import sys
 
 # Main function
@@ -8,6 +9,6 @@ if __name__ == "__main__":
 		host = sys.argv[1]
 		port = sys.argv[2]
 
-	app.run(host=host, port=port, debug=True)
-
-	run()
+	#app.run(host=host, port=port, debug=True)
+	server = WSGIServer(("",5000), app)
+	server.serve_forever()
