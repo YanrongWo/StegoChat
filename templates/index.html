@@ -19,11 +19,36 @@
     <link rel='stylesheet' href='/static/css/reset.css'>
 
     <link rel='stylesheet' href='/static/css/index.css'>
+
+    <script src="/static/javascript/index.js"></script>
   </head>
 
   <body>
-    <div id="menu" style=""></div>
+    <div id="menu" style=""><p> StegoChat </p></div>
+    <div id="convo_section"> </div>
+    <div id="entry_section"> 
+      <input type="text" id="message" name="message">
+      <button class="btn btn-default"> Send </button>
+    </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Please choose username:</h4>
+        </div>
+        <div class="modal-body">
+              <label for="username">Username:</label>
+              <input type="text" id="username" name="username">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" onclick="setUsername()"class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
   </body>
-
-
 </html>
