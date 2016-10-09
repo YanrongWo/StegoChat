@@ -23,13 +23,13 @@ def publishMessage():
 @app.route('/subscribeToChat', methods=["GET", "POST"])
 def subscribeToChat():
 	def genMessages():
-        q = Queue()
-        subscriptions.append(q)
-        try:
-            while True:
-                result = q.get()
-                yield jsonify(result)
-        except GeneratorExit: # Or maybe use flask signals
-            subscriptions.remove(q)
+		q = Queue()
+		subscriptions.append(q)
+		try:
+			while True:
+				result = q.get()
+				yield jsonify(result)
+		except GeneratorExit: # Or maybe use flask signals
+		subscriptions.remove(q)
 
-    return Response(genMessages(), mimetype="text/event-stream")
+	return Response(genMessages(), mimetype="text/event-stream")
