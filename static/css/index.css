@@ -5,11 +5,15 @@
 	display: block;
 	background-color: #C4D8E2;
 }
-
+#logo{
+	height: 50px;
+	position: relative;
+	display: block;
+}
 #convo_section{
 	position: relative;
 	display: block;
-	width: 100%;
+	max-width: 100vw;
 	height: 80vh;
 	overflow: auto;
 }

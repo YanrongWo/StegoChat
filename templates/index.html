@@ -21,14 +21,19 @@
     <link rel='stylesheet' href='/static/css/index.css'>
 
     <script src="/static/javascript/index.js"></script>
+    <script src="static/javascript/web_steganography.js"></script>
   </head>
 
   <body>
-    <div id="menu" style=""><p> StegoChat </p></div>
+    <div id="menu" style="">
+      <p> StegoChat </p>
+      <img id="logo" src="/static/images/logo.png"/>
+    </div>
     <div id="convo_section"> </div>
     <div id="entry_section"> 
       <input type="text" id="message" name="message">
       <button class="btn btn-default" onclick="sendMessage()"> Send </button>
+      <button class="btn btn-default" onclick="sendImage()"> Image </button>
     </div>
 
   <!-- Modal -->
