@@ -19,7 +19,7 @@ function sendMessage(){
 	var message = $("#message").val();
 	$.ajax({
 		url: "/publishMessage",
-		method: "GET",
+		method: "POST",
 		data: {
 				sender: username,
 				content: message,
