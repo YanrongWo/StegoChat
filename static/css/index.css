@@ -18,4 +18,10 @@
 	position: fixed;
 	display: block;
 	height: 10vh;
+	width: 100%;
+}
+
+#message{
+	width: 60%;
+	margin: 0 auto;
 }

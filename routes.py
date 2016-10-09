@@ -1,7 +1,8 @@
 from flask import request, render_template, g, redirect, Response, make_response, jsonify, url_for, session, escape
 from __init__ import app
 
-from gevent import Queue
+from gevent.queue import Queue
+import gevent
 
 subscriptions = []
 
@@ -11,25 +12,27 @@ def index():
 
 @app.route("/publishMessage", methods=["GET", "POST"])
 def publishMessage():
-	user = request.args.get('sender')
-	message_type = request.args.get('type') # text, stego-image
-	content = request.args.get('content')
+    user = request.args.get('sender')
+    message_type = request.args.get('type') # text, stego-image
+    content = request.args.get('content')
 
-	message_dict = { "sender": user, "type": message_type, "content": content }
+    message_dict = { "sender": user, "type": message_type, "content": content }
 
-	for s in subscriptions:
-		s.put(s)
-
+    for s in subscriptions:
+        s.put(s)
+    return 'ok'
 @app.route('/subscribeToChat', methods=["GET", "POST"])
 def subscribeToChat():
-	def genMessages():
-		q = Queue()
-		subscriptions.append(q)
-		try:
-			while True:
-				result = q.get()
-				yield jsonify(result)
-		except GeneratorExit: # Or maybe use flask signals
-		subscriptions.remove(q)
-
-	return Response(genMessages(), mimetype="text/event-stream")
+    def genMessages():
+        q = Queue()
+        subscriptions.append(q)
+        try:
+            while True:
+                gevent.sleep(1)
+                result = q.get()
+                print "here"
+                yield 'a'
+                #yield jsonify(result)
+        except GeneratorExit: # Or maybe use flask signals
+            subscriptions.remove(q)
+    return Response(genMessages(), mimetype="text/event-stream")
