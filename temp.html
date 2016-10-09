@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<head>
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+<body>
+</body>
+
+<script>
+  var urls;
+  function search(query){
+    $.ajax({
+      url: "http://flickr.com/services/rest/?",
+      dataType: "jsonp",
+      method: "GET",
+      jsonp: 'jsoncallback',
+      data: {
+              method: 'flickr.photos.search',
+              api_key: 'b207e9ca3796129473bcfe3b6b6825ba',
+              tags: query,
+              format: 'json',
+            },
+      success: function(response) {
+        console.log("done");
+        photos = response.photos.photo;
+        urls = [];
+        for (index in photos){
+          url  = 'https://farm'+photos[index].farm+'.staticflickr.com/'+photos[index].server 
+            +'/'+photos[index].id +'_'+photos[index].secret+'.jpg';
+          urls.push(url);          
+        }
+      }
+    });
+  }
+</script>
