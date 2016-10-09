@@ -20,7 +20,7 @@ def publishMessage():
 	for s in subscriptions:
 		s.put(s)
 
-
+@app.route('/subscribeToChat', methods=["GET", "POST"])
 def subscribeToChat():
 	def genMessages():
         q = Queue()
