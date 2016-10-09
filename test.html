@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<script src="static/javascript/web_steganography.js"></script>
+	</head>
+	<body>
+		<script>
+			console.log("hello");
+			ImageLoader.loadImageData("https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTvWJ0HToX_-aq63KMhzQix8S6DL_RjpXDNQjZISMLeI0VMZL72DqSjfrQn",
+				function(data){
+					var hidden = SteganographyTool.hide(data, "abc123");
+					var hiddenURL = ImageLoader.dataToURL(hidden);
+
+					document.getElementById('result').src = hiddenURL;
+
+					var message = SteganographyTool.find(hidden);
+
+					console.log(message);
+				}
+			);
+		</script>
+
+		<canvas id='c1'></canvas>
+		<canvas id='c2'></canvas>
+		<img id='result'/>
+	</body>
+</html>
